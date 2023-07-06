@@ -1,4 +1,7 @@
-export default function RestaurantReviewCard() {
+import Stars from "@/app/components/Stars";
+import { Review } from "@prisma/client";
+
+export default function RestaurantReviewCard({review}: {review: Review}) {
   return (
     <div className="border-b pb-7 mb-7">
       <div className="flex">
@@ -6,19 +9,17 @@ export default function RestaurantReviewCard() {
           <div
             className="flex items-center justify-center w-16 h-16 bg-blue-400 rounded-full"
           >
-            <h2 className="text-2xl text-white">MJ</h2>
+            <h2 className="text-2xl text-white uppercase">{review.first_name[0]}{review.last_name[0]}</h2>
           </div>
-          <p className="text-center">Micheal Jordan</p>
+          <p className="text-center">{review.first_name} {review.last_name}</p>
         </div>
         <div className="w-5/6 ml-10">
           <div className="flex items-center">
-            <div className="flex mr-5">*****</div>
+            <Stars rating={review.rating} reviews={[]} />
           </div>
           <div className="mt-5">
             <p className="text-lg font-light">
-              Laurie was on top of everything! Slow night due to the
-              snow storm so it worked in our favor to have more one on
-              one with the staff. Delicious and well worth the money.
+              {review.text}
             </p>
           </div>
         </div>

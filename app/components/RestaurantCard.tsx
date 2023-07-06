@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import { RestaurantCardType } from '../page';
 import Price from './Price';
+import Stars from './Stars';
 
 interface Props {
   restaurant: RestaurantCardType;
 }
 
 export default function RestaurantCard({restaurant}: Props) {
+  const numReviews = restaurant.reviews.length;
   return (
     <div
       className="w-64 m-3 overflow-hidden border rounded cursor-pointer h-72"
@@ -20,8 +22,8 @@ export default function RestaurantCard({restaurant}: Props) {
         <div className="p-1">
           <h3 className="mb-2 text-2xl font-bold">{restaurant.name}</h3>
           <div className="flex items-start">
-            <div className="flex mb-2">*****</div>
-            <p className="ml-2">77 reviews</p>
+            <Stars reviews={restaurant.reviews} />
+            <p className="ml-2">{numReviews} review{numReviews === 1 ? "" : "s"}</p>
           </div>
           <div className="flex font-light capitalize text-reg">
             <p className="mr-3">{restaurant.cuisine.name}</p>
